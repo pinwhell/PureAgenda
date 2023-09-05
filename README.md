@@ -1,27 +1,17 @@
-# React + TypeScript + Vite
+# PureAgenda 📝✨
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Elegance in Task Management**
 
-Currently, two official plugins are available:
+PureAgenda is more than just a TodoList app. It's your companion in the pursuit of organized simplicity. With its clean and intuitive interface, PureAgenda helps you embrace productivity and declutter your day effortlessly.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+✅ **Effortless Task Management**: Create, delete, and mark tasks as completed with a single click or tap.
 
-## Expanding the ESLint configuration
+🔍 **Intelligent Filtering**: Easily focus on what matters most by sorting tasks based on completion status.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+💫 **Streamlined Aesthetics**: Experience task management in its purest form with a minimalist design that soothes the senses.
 
-- Configure the top-level `parserOptions` property like this:
+Let PureAgenda elevate your daily productivity while adding an aesthetic touch to your task management. Embrace the elegance of simplicity today.
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+![image](https://github.com/pinwhell/PureAgenda/assets/60289470/63a34a92-862e-4d38-82bc-7a9bdbb9ffff)
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
