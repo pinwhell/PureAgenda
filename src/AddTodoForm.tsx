@@ -1,8 +1,8 @@
-import React from 'react';
+import './App.css';
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { useTodos } from './TodosContext.tsx';
 import Todo from './Todo.tsx';
-import './App.css';
 
 const initialTodo: Todo = {
     id: 0,
@@ -11,8 +11,9 @@ const initialTodo: Todo = {
     completed: false,
 };
 
-function AddTodoForm ({addTodo})
+function AddTodoForm ()
 {
+  const [todos, setTodos] = useTodos();
   const [todo, setTodo] = useState<Todo>(initialTodo);
 
   const setTitle = (title : string) =>
@@ -25,11 +26,15 @@ function AddTodoForm ({addTodo})
     setTodo({...todo, description: desc});
   };
 
+  const addTodo = (newTodo: Todo) => {
+    setTodos((prevTodos: Todo[]) => [...prevTodos, newTodo]);
+  };
+
   const onAddClick = (e) =>
   {
     e.preventDefault();
 
-    if(todo.title.length === 0 || todo.description.length === 0)
+    if(!todo.title || !todo.description)
       return;
 
     todo.id = uuidv4();

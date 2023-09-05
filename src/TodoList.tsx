@@ -1,48 +1,28 @@
 import './App.css';
 import { FilterType } from './FilterButtons';
 import { useStatePersist } from './useStatePersist';
+import { useTodos } from './TodosContext';
 import FilterButtons from './FilterButtons';
 import Todo from './Todo';
 import TodoItem from './TodoItem';
-import AddTodoForm from './AddTodoForm';
 
 function TodoList() {
-
-    const [todos, setTodos] = useStatePersist<Todo[]>("TodoList.Todos", []);
+    const [todos, setTodos] = useTodos();
     const [filterType, setFilterType] = useStatePersist<FilterType>("TodoList.Filter", FilterType.All);
-
-    const addTodo = (newTodo: Todo) => {
-        setTodos((prevTodos: Todo[]) => [...prevTodos, newTodo]);
-    };
-
-    const onCompleted = (todo: Todo) =>
-    {
-        setTodos((prevTodos: Todo[]) =>
-            prevTodos.map((prevTodo: Todo) =>
-                prevTodo.id === todo.id ? { ...prevTodo, completed: true } : prevTodo
-            )
-        );
-    };
-
-    const onDelete = (todo: Todo) =>
-    {
-    setTodos((prevTodos: Todo[]) => prevTodos.filter((prevTodo: Todo) => prevTodo.id !== todo.id))
-    };
 
     const todoFilter = (todo: Todo) =>
     {
         if(filterType == FilterType.Completed && todo.completed !== true)
-        return null;
+            return null;
 
         if(filterType == FilterType.Pending && todo.completed !== false)
-        return null;
+            return null;
 
         return todo;
     };
 
     return (
     <>
-        <AddTodoForm  addTodo={addTodo}/>
         {
             todos.length > 0 ?
             <>
@@ -59,7 +39,7 @@ function TodoList() {
             {
                 todos
                 .filter(todoFilter)
-                .map((todo: Todo) => <TodoItem key={todo.id} todo={todo} onCompleted={onCompleted} onDelete={onDelete}/>)
+                .map((todo: Todo) => <TodoItem key={todo.id} todo={todo} />)
             }
         </div>
     </>
