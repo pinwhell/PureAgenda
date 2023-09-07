@@ -1,18 +1,26 @@
 import { useState } from 'react';
 
-export function useStatePersist<T>(persistName: string, defaultVal: T) {
-    const [obj, setObj] = useState(() => {
-        const obj = localStorage.getItem(persistName);
-        return obj === null ? defaultVal : JSON.parse(obj);
+type UpdateObject<T> = (updater: ((prevObj: T) => T) | T) => void;
+
+export function useStatePersist<T>(
+  persistName: string,
+  defaultVal: T
+): [T, UpdateObject<T>] {
+  const [obj, setObj] = useState<T>(() => {
+    const obj = localStorage.getItem(persistName);
+    return obj === null ? defaultVal : JSON.parse(obj);
+  });
+
+  const updateObj: UpdateObject<T> = (updater) => {
+    setObj((prevObj: T) => {
+      const newObj =
+        typeof updater === 'function'
+          ? (updater as CallableFunction)(prevObj)
+          : updater;
+      localStorage.setItem(persistName, JSON.stringify(newObj));
+      return newObj;
     });
+  };
 
-    const updateObj = (updater: ((prevObj: T) => T) | T) => {
-        setObj((prevObj: T) => {
-        const newObj = typeof updater === 'function' ? updater(prevObj) : updater;
-        localStorage.setItem(persistName, JSON.stringify(newObj));
-        return newObj;
-        });
-    };
-
-    return [obj, updateObj];
+  return [obj, updateObj];
 }
