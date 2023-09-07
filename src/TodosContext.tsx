@@ -1,18 +1,17 @@
-import React, { createContext, useContext } from 'react';
+import { ReactNode, createContext, useContext } from 'react';
 import { useStatePersist } from './useStatePersist';
-import Todo from './Todo';
+import Todo from './todo';
 
-const TodosContext = createContext([]);
+type TodosContextValue = ReturnType<typeof useStatePersist<Todo[]>>;
 
-export function TodosProvider({children})
-{
-    const todosState = useStatePersist<Todo[]>('todos', []);
+const TodosContext = createContext<TodosContextValue>({} as TodosContextValue);
 
-    return (
-    <TodosContext.Provider value={todosState}>
-        {children}
-    </TodosContext.Provider>    
-    );
+export function TodosProvider({ children }: { children: ReactNode }) {
+  const todosState = useStatePersist<Todo[]>('todos', []);
+
+  return (
+    <TodosContext.Provider value={todosState}>{children}</TodosContext.Provider>
+  );
 }
 
 export const useTodos = () => useContext(TodosContext);
